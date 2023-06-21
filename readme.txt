@@ -1,0 +1,100 @@
+// api documentation
+
+// Creation
+Nudge api allows user to create events to share important imformation
+
+// URl
+baseurl="/api/v3/app"
+for all api endpoints
+
+//End Points
+
+1> Create a Nudge
+
+endpoints:"/events"
+
+Method:Points
+
+Request.query:
+
+////////////// example
+
+        type: 'event',
+        uid: 18,
+        name: 'Event1',
+        tagline: 'Tagline for Event 1',
+        schedule: new Date('2023-06-21T09:00:00Z'),
+        description: 'Description for Event 1',
+        files: { image: 'path/to/image1.jpg' },
+        moderator: 'Moderator 1',
+        category: 'Category 1',
+        sub_category: 'Subcategory 1',
+        rigor_rank: 5,
+        attendees: [1, 2, 3]
+
+///////////
+
+type:(string) event
+uid:(Integer) user id
+name:(string) name of the event
+tagline:(string) A proper tag-line for the event
+schedule:(new Date()) (Date + time) Timestamp
+description:(String) Any description on the event
+files[image]: Image file (File upload)
+moderator:(string) A user who is going to host
+category:(string) Category of the event
+sub_category:(string) Sub category
+rigor_rank:(Integer) Integer value
+attendees:([]) Array of user Id's who is attending the event
+
+
+2> Get Nudge Details
+  Retrieves the details of a specific nudge.
+  endpoints:"/events?id=:event_id"
+  Method:`GET`
+
+  response:
+  {
+       type: 'event',
+        uid: 18,
+        name: 'Event1',
+        tagline: 'Tagline for Event 1',
+        schedule: new Date('2023-06-21T09:00:00Z'),
+        description: 'Description for Event 1',
+        files: { image: 'path/to/image1.jpg' },
+        moderator: 'Moderator 1',
+        category: 'Category 1',
+        sub_category: 'Subcategory 1',
+        rigor_rank: 5,
+        attendees: [1, 2, 3]
+  }
+
+
+id:ObjectID of event present in database
+
+
+3> POST nudge
+creates a  event of given details
+Method:"PUT"
+does same as post method
+
+
+4> Delete Nudge 
+  deletes nudge of given id
+endpoints:"/events?id=:event_id"
+method:"DELETE"
+
+The request successfully deleted the nudge with ID
+
+
+// Error Responses:
+
+HTTP Status: 404 Not Found
+
+The specified nudge was not found.
+HTTP Status: 403 Forbidden
+
+The user does not have the necessary permissions to delete the nudge.
+HTTP Status: 401 Unauthorized
+
+The request lacks valid authentication credentials.
